@@ -1,7 +1,9 @@
 <template>
     <header class="my-10">
         <BaseContainer>
-            <img src="/logo.svg" alt="" />
+            <RouterLink to="/">
+                <img src="/logo.svg" alt="" />
+            </RouterLink>
         </BaseContainer>
     </header>
     <main class="grow">

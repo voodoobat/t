@@ -16,7 +16,7 @@ export const router = createRouter({
             name: 'users-small',
             component: UsersView,
             beforeEnter() {
-                useUsersStore().fetch('small')
+                useUsersStore().fetch(32)
             },
         },
         {
@@ -24,7 +24,7 @@ export const router = createRouter({
             name: 'users-large',
             component: UsersView,
             beforeEnter() {
-                useUsersStore().fetch('large')
+                useUsersStore().fetch(999)
             },
         },
     ],

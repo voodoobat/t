@@ -2,7 +2,12 @@
 export default {
     content: ['./index.html', './src/**/*.vue'],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                base: ['Open Sans', 'sans-serif'],
+                accent: ['Montserrat', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 }

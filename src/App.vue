@@ -1,3 +1,7 @@
 <template>
-    <h1 class="text-2xl">Tailwind</h1>
+    <HomeView />
 </template>
+
+<script setup lang="ts">
+import HomeView from '~/views/HomeView.vue'
+</script>

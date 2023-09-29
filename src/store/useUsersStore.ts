@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useAxios } from '~/service/useAxios.ts'
 import { UserContract } from '~/contracts/user.ts'
 import { SortPropType, SortUsersInterface } from '~/constants/sort.ts'
+import { computed } from 'vue'
 
 export const useUsersStore = defineStore('users', {
     state: (): {
@@ -18,7 +19,7 @@ export const useUsersStore = defineStore('users', {
         search: '',
         sort: null,
         active: null,
-        showBy: 10,
+        showBy: 5,
         page: 1,
     }),
     actions: {
@@ -37,40 +38,42 @@ export const useUsersStore = defineStore('users', {
         },
     },
     getters: {
-        searchResult(): UserContract[] {
-            if (this.search) {
-                return this.users.filter(({ id, firstName, lastName, email, phone }) => {
-                    const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
-                    return src.includes(this.search.toLowerCase().trim())
-                })
-            }
-
-            return this.users
-        },
-        sortedResult(): UserContract[] {
-            if (this.sort) {
-                const prop = this.sort.prop as SortPropType
-
-                return this.searchResult.sort((x, y) => {
-                    if (x[prop] > y[prop]) {
-                        return this.sort?.direction === 'ASC' ? 1 : -1
-                    }
-
-                    if (x[prop] < y[prop]) {
-                        return this.sort?.direction === 'ASC' ? -1 : 1
-                    }
-
-                    return 0
-                })
-            }
-
-            return this.searchResult
-        },
         usersData(): UserContract[] {
+            const searchResults = computed<UserContract[]>(() => {
+                if (this.search) {
+                    return this.users.filter(({ id, firstName, lastName, email, phone }) => {
+                        const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
+                        return src.includes(this.search.toLowerCase().trim())
+                    })
+                }
+
+                return this.users
+            })
+
+            const sortResults = computed<UserContract[]>(() => {
+                if (this.sort) {
+                    const prop = this.sort.prop as SortPropType
+
+                    return searchResults.value.sort((x, y) => {
+                        if (x[prop] > y[prop]) {
+                            return this.sort?.direction === 'ASC' ? 1 : -1
+                        }
+
+                        if (x[prop] < y[prop]) {
+                            return this.sort?.direction === 'ASC' ? -1 : 1
+                        }
+
+                        return 0
+                    })
+                }
+
+                return searchResults.value
+            })
+
             const from = (this.page - 1) * this.showBy
             const to = this.page * this.showBy
 
-            return this.sortedResult.slice(from, to)
+            return sortResults.value.slice(from, to)
         },
     },
 })

@@ -8,10 +8,7 @@
     </header>
     <main class="grow">
         <BaseContainer>
-            <h1
-                v-if="title"
-                class="mt-10 text-4xl font-accent font-semibold text-center"
-            >
+            <h1 v-if="title" class="mt-10 text-4xl font-accent font-semibold text-center">
                 {{ title }}
             </h1>
             <BaseLoader v-if="isLoading" class="mt-10" />

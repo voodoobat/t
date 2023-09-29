@@ -5,8 +5,7 @@
             :key="key"
             class="cursor-pointer transition-colors hover:bg-gray-100"
             :class="{
-                'cursor-default bg-gray-200':
-                    store.active?.email === user.email,
+                'cursor-default bg-gray-200': store.active?.email === user.email,
             }"
             :user="user"
             @click="store.active = user"

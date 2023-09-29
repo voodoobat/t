@@ -6,16 +6,14 @@
                 <BaseIcon
                     class="w-2 h-2 rotate-180 transition-colors"
                     :class="{
-                        'text-blue-600':
-                            isActive && store.sort?.direction === 'DESC',
+                        'text-blue-600': isActive && store.sort?.direction === 'DESC',
                     }"
                     name="chevron"
                 />
                 <BaseIcon
                     class="w-2 h-2 transition-colors"
                     :class="{
-                        'text-blue-600':
-                            isActive && store.sort?.direction === 'ASC',
+                        'text-blue-600': isActive && store.sort?.direction === 'ASC',
                     }"
                     name="chevron"
                 />

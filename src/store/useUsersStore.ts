@@ -41,14 +41,10 @@ export const useUsersStore = defineStore('users', {
     getters: {
         searchResults(): UserContract[] {
             if (this.search) {
-                return this.users.filter(
-                    ({ id, firstName, lastName, email, phone }) => {
-                        const src = [id, firstName, lastName, email, phone]
-                            .join(' ')
-                            .toLowerCase()
-                        return src.includes(this.search.toLowerCase().trim())
-                    },
-                )
+                return this.users.filter(({ id, firstName, lastName, email, phone }) => {
+                    const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
+                    return src.includes(this.search.toLowerCase().trim())
+                })
             }
 
             return this.users
@@ -59,10 +55,8 @@ export const useUsersStore = defineStore('users', {
                     const prop = this.sort.prop as SortPropType
 
                     return this.searchResults.sort((x, y) => {
-                        if (x[prop] > y[prop])
-                            return this.sort?.direction === 'ASC' ? 1 : -1
-                        if (x[prop] < y[prop])
-                            return this.sort?.direction === 'ASC' ? -1 : 1
+                        if (x[prop] > y[prop]) return this.sort?.direction === 'ASC' ? 1 : -1
+                        if (x[prop] < y[prop]) return this.sort?.direction === 'ASC' ? -1 : 1
 
                         return 0
                     })

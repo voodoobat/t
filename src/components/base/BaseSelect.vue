@@ -4,7 +4,7 @@
             {{ label }}
         </label>
         <div class="relative">
-            <select class="select" @change="$emit('update:value', $event.target?.value)">
+            <select class="select" @change="change">
                 <option v-for="{ text, value } in options" :key="value" :value="value">
                     {{ text }}
                 </option>
@@ -18,11 +18,18 @@
 import { OptionInterface } from '~/constants/select.ts'
 import BaseIcon from '~/components/base/BaseIcon.vue'
 
-defineEmits(['update:value'])
+const emit = defineEmits(['update:value', 'change'])
 defineProps<{
     label?: string
     options: OptionInterface[]
 }>()
+
+const change = (ev: Event) => {
+    const target = ev.target as HTMLInputElement
+
+    emit('update:value', target.value)
+    emit('change', ev)
+}
 </script>
 
 <style scoped>

@@ -39,23 +39,22 @@ export const useUsersStore = defineStore('users', {
         },
     },
     getters: {
+        searchResults(): UserContract[] {
+            if (this.search) {
+                return this.users.filter(({ id, firstName, lastName, email, phone }) => {
+                    const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
+                    return src.includes(this.search.toLowerCase().trim())
+                })
+            }
+
+            return this.users
+        },
         usersData(): UserContract[] {
-            const searchResults = computed<UserContract[]>(() => {
-                if (this.search) {
-                    return this.users.filter(({ id, firstName, lastName, email, phone }) => {
-                        const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
-                        return src.includes(this.search.toLowerCase().trim())
-                    })
-                }
-
-                return this.users
-            })
-
             const sortResults = computed<UserContract[]>(() => {
                 if (this.sort) {
                     const prop = this.sort.prop as SortPropType
 
-                    return searchResults.value.sort((x, y) => {
+                    return this.searchResults.sort((x, y) => {
                         if (x[prop] > y[prop]) return this.sort?.direction === 'ASC' ? 1 : -1
                         if (x[prop] < y[prop]) return this.sort?.direction === 'ASC' ? -1 : 1
 
@@ -63,7 +62,7 @@ export const useUsersStore = defineStore('users', {
                     })
                 }
 
-                return searchResults.value
+                return this.searchResults
             })
 
             const from = (this.page - 1) * this.showBy

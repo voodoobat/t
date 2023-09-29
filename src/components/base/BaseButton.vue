@@ -1,5 +1,5 @@
 <template>
-    <component :is="component" :to="to" :type="type" class="button">
+    <component :is="component" :to="to" :type="type" class="current">
         <slot />
     </component>
 </template>
@@ -25,7 +25,7 @@ const component = computed(() => {
 </script>
 
 <style scoped>
-.button {
+.current {
     @apply text-center
         py-4
         px-6

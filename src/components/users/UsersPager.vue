@@ -1,6 +1,12 @@
 <template>
     <div class="flex justify-between pt-2 pb-6">
-        <BaseSelect v-model:value="store.showBy" label="Rows per page" :options="options" />
+        <BasePager
+            :active="store.page"
+            :size="store.showBy"
+            :total="store.searchResults.length"
+            @change="(page) => (store.page = page)"
+        />
+        <BaseSelect v-model:value="store.showBy" label="Rows per page" :options="options" @change="store.page = 1" />
     </div>
 </template>
 
@@ -8,9 +14,9 @@
 import BaseSelect from '~/components/base/BaseSelect.vue'
 import { OptionInterface } from '~/constants/select.ts'
 import { useUsersStore } from '~/store/useUsersStore.ts'
+import BasePager from '~/components/base/BasePager.vue'
 
 const store = useUsersStore()
-
 const options: OptionInterface[] = [
     {
         value: 5,

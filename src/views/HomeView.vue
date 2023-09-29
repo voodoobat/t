@@ -6,7 +6,7 @@
         </div>
     </BaseLayout>
 </template>
-§
+
 <script setup lang="ts">
 import BaseLayout from '~/components/base/BaseLayout.vue'
 import BaseButton from '~/components/base/BaseButton.vue'

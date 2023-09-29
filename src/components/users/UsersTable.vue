@@ -1,5 +1,8 @@
 <template>
-    <BaseInput v-model:value="store.search" class="mb-2" />
+    <div class="flex flex-col-reverse md:flex-row gap-4 justify-between items-center mb-2">
+        <BaseInput v-model:value="store.search" class="w-full md:w-1/3" />
+        <BaseButton>Добавить</BaseButton>
+    </div>
     <template v-if="store.usersData.length">
         <div class="overflow-x-hidden md:overflow-x-visible">
             <div class="overflow-x-scroll md:overflow-x-visible">
@@ -18,6 +21,7 @@ import { useUsersStore } from '~/store/useUsersStore.ts'
 import BaseInput from '~/components/base/BaseInput.vue'
 import UsersHead from '~/components/users/UsersHead.vue'
 import UsersBody from '~/components/users/UsersBody.vue'
+import BaseButton from '~/components/base/BaseButton.vue'
 
 const store = useUsersStore()
 </script>

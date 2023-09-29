@@ -1,12 +1,12 @@
 <template>
-    <BaseLayout title="Пользователи" :is-loading="store.isLoading">
+    <LayoutDefault title="Пользователи" :is-loading="store.isLoading">
         <UsersTable />
         <UsersFoot class="mt-5" />
-    </BaseLayout>
+    </LayoutDefault>
 </template>
 
 <script setup lang="ts">
-import BaseLayout from '~/components/base/BaseLayout.vue'
+import LayoutDefault from '~/components/layout/LayoutDefault.vue'
 import UsersTable from '~/components/users/UsersTable.vue'
 import UsersFoot from '~/components/users/UsersFoot.vue'
 import { useUsersStore } from '~/store/useUsersStore.ts'

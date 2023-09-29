@@ -1,5 +1,5 @@
 <template>
-    <div class="inline-flex text-sm w-full">
+    <div class="inline-flex text-sm">
         <input
             :value="value"
             :type="type"

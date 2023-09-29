@@ -1,27 +1,27 @@
 <template>
     <header class="my-10">
-        <BaseContainer>
+        <LayoutContainer>
             <RouterLink to="/">
                 <img src="/logo.svg" alt="" />
             </RouterLink>
-        </BaseContainer>
+        </LayoutContainer>
     </header>
     <main class="grow">
-        <BaseContainer>
+        <LayoutContainer>
             <h1 v-if="title" class="mt-10 text-4xl font-accent font-semibold text-center">
                 {{ title }}
             </h1>
-            <BaseLoader v-if="isLoading" class="mt-10" />
+            <LayoutLoader v-if="isLoading" class="mt-10" />
             <section v-else class="mt-10">
                 <slot />
             </section>
-        </BaseContainer>
+        </LayoutContainer>
     </main>
 </template>
 
 <script setup lang="ts">
-import BaseContainer from '~/components/base/BaseContainer.vue'
-import BaseLoader from '~/components/base/BaseLoader.vue'
+import LayoutContainer from '~/components/layout/LayoutContainer.vue'
+import LayoutLoader from '~/components/layout/LayoutLoader.vue'
 
 defineProps<{
     title?: string

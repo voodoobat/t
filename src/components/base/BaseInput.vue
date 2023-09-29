@@ -5,7 +5,7 @@
             :type="type"
             :placeholder="placeholder"
             :required="required"
-            class="w-full py-2 px-3 border border-gray-100 focus:border-gray-200 outline-none rounded-sm transition-colors"
+            class="input"
             @input="$emit('update:value', $event.target?.value)"
             @focus="$emit('focus', $event.target)"
         />
@@ -21,11 +21,9 @@ type HTMLInputTypeAttribute =
     | 'checkbox'
     | 'color'
     | 'date'
-    | 'datetime-local'
     | 'email'
     | 'hidden'
     | 'password'
-    | 'range'
 
 defineEmits(['update:value', 'focus'])
 withDefaults(
@@ -41,3 +39,18 @@ withDefaults(
     },
 )
 </script>
+
+<style scoped>
+.input {
+    @apply w-full
+        py-2
+        px-4
+        leading-none
+        border
+        border-gray-200
+        focus:border-blue-500
+        outline-none
+        rounded-sm
+        transition-colors;
+}
+</style>

@@ -12,9 +12,11 @@
                 {{ title }}
             </h1>
             <LayoutLoader v-if="isLoading" class="mt-10" />
-            <section v-else class="mt-10">
-                <slot />
-            </section>
+            <transition name="fx-page">
+                <section v-if="!isLoading" class="mt-10">
+                    <slot />
+                </section>
+            </transition>
         </LayoutContainer>
     </main>
 </template>
@@ -28,3 +30,20 @@ defineProps<{
     isLoading?: boolean
 }>()
 </script>
+
+<style scoped>
+.fx-page-enter-from,
+.fx-page-leave-to {
+    @apply opacity-0 scale-125;
+}
+
+.fx-page-enter-to,
+.fx-page-leave-from {
+    @apply opacity-100 scale-100;
+}
+
+.fx-page-enter-active,
+.fx-page-leave-active {
+    @apply transition-all duration-500;
+}
+</style>

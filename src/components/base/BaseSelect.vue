@@ -15,13 +15,13 @@
 </template>
 
 <script setup lang="ts">
-import { OptionInterface } from '~/constants/select.ts'
+import { IBaseSelectOption } from '~/contracts/components/baseSelect.ts'
 import BaseIcon from '~/components/base/BaseIcon.vue'
 
 const emit = defineEmits(['update:value', 'change'])
 defineProps<{
     label?: string
-    options: OptionInterface[]
+    options: IBaseSelectOption[]
 }>()
 
 const change = (ev: Event) => {

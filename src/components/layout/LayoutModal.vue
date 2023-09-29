@@ -68,6 +68,6 @@ watch(props, ({ isOpen }) => {
 
 .fx-modal-enter-active,
 .fx-modal-leave-active {
-    @apply transition-all;
+    @apply transition-all duration-300;
 }
 </style>

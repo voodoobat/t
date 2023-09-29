@@ -28,7 +28,7 @@ const component = computed(() => {
 <style scoped>
 .button {
     @apply text-center
-        py-4
+        py-2
         px-6
         bg-blue-950
         text-blue-400

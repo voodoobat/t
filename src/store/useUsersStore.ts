@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
 import { useAxios } from '~/service/useAxios.ts'
-import { UserContract } from '~/contracts/user.ts'
-import { SortPropType, SortUsersInterface } from '~/constants/sort.ts'
+import { IUser, TUserProps } from '~/contracts/scheme/user.ts'
+import { IBaseTableSort } from '~/contracts/components/baseTable.ts'
 
 export const useUsersStore = defineStore('users', {
     state: (): {
         isLoading: boolean
-        users: UserContract[]
+        users: IUser[]
         search: string
-        sort: SortUsersInterface | null
-        active: UserContract | null
+        sort: IBaseTableSort | null
+        active: IUser | null
         showBy: number
         page: number
     } => ({
@@ -28,7 +28,7 @@ export const useUsersStore = defineStore('users', {
 
             this.$reset()
             this.isLoading = true
-            const { data, error } = await useAxios<UserContract[]>('get', url)
+            const { data, error } = await useAxios<IUser[]>('get', url)
 
             if (error) {
                 return console.error(error)
@@ -39,7 +39,7 @@ export const useUsersStore = defineStore('users', {
         },
     },
     getters: {
-        searchResults(): UserContract[] {
+        searchResults(): IUser[] {
             if (this.search) {
                 return this.users.filter(({ id, firstName, lastName, email, phone }) => {
                     const src = [id, firstName, lastName, email, phone].join(' ').toLowerCase()
@@ -49,10 +49,10 @@ export const useUsersStore = defineStore('users', {
 
             return this.users
         },
-        usersData(): UserContract[] {
-            const sortResults = computed<UserContract[]>(() => {
+        usersData(): IUser[] {
+            const sortResults = computed<IUser[]>(() => {
                 if (this.sort) {
-                    const prop = this.sort.prop as SortPropType
+                    const prop = this.sort.key as TUserProps
 
                     return this.searchResults.sort((x, y) => {
                         if (x[prop] > y[prop]) return this.sort?.direction === 'ASC' ? 1 : -1

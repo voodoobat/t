@@ -17,6 +17,7 @@
         </div>
     </th>
 </template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import BaseIcon from '~/components/base/BaseIcon.vue'

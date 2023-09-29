@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
+import { computed } from 'vue'
 import { useAxios } from '~/service/useAxios.ts'
 import { UserContract } from '~/contracts/user.ts'
 import { SortPropType, SortUsersInterface } from '~/constants/sort.ts'
-import { computed } from 'vue'
 
 export const useUsersStore = defineStore('users', {
     state: (): {
@@ -26,6 +26,7 @@ export const useUsersStore = defineStore('users', {
         async fetch(count: number) {
             const url = `http://www.filltext.com/?rows=${count}&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D`
 
+            this.$reset()
             this.isLoading = true
             const { data, error } = await useAxios<UserContract[]>('get', url)
 
@@ -55,13 +56,8 @@ export const useUsersStore = defineStore('users', {
                     const prop = this.sort.prop as SortPropType
 
                     return searchResults.value.sort((x, y) => {
-                        if (x[prop] > y[prop]) {
-                            return this.sort?.direction === 'ASC' ? 1 : -1
-                        }
-
-                        if (x[prop] < y[prop]) {
-                            return this.sort?.direction === 'ASC' ? -1 : 1
-                        }
+                        if (x[prop] > y[prop]) return this.sort?.direction === 'ASC' ? 1 : -1
+                        if (x[prop] < y[prop]) return this.sort?.direction === 'ASC' ? -1 : 1
 
                         return 0
                     })

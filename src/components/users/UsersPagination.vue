@@ -1,0 +1,32 @@
+<template>
+    <div class="flex justify-between pt-2 pb-6">
+        <BaseSelect v-model:value="store.showBy" label="Rows per page" :options="options" />
+    </div>
+</template>
+
+<script setup lang="ts">
+import BaseSelect from '~/components/base/BaseSelect.vue'
+import { OptionInterface } from '~/constants/select.ts'
+import { useUsersStore } from '~/store/useUsersStore.ts'
+
+const store = useUsersStore()
+
+const options: OptionInterface[] = [
+    {
+        value: 5,
+        text: '5',
+    },
+    {
+        value: 15,
+        text: '15',
+    },
+    {
+        value: 25,
+        text: '25',
+    },
+    {
+        value: 50,
+        text: '50',
+    },
+]
+</script>

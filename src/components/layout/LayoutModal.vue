@@ -1,7 +1,7 @@
 <template>
     <teleport to="body">
         <transition name="fx-modal" appear>
-            <div class="fixed w-full h-full top-0 left-0">
+            <div v-if="isOpen" class="fixed w-full h-full top-0 left-0">
                 <div
                     class="absolute top-0 left-0 w-full h-full bg-black/50"
                     @click="$emit('close')"
@@ -18,15 +18,29 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { watch } from 'vue'
 
-defineEmits(['close'])
-defineProps<{
+const emit = defineEmits(['close'])
+const props = defineProps<{
     title?: string
+    isOpen: boolean
 }>()
 
-onMounted(() => document.body.classList.add('overflow-hidden'))
-onUnmounted(() => document.body.classList.remove('overflow-hidden'))
+const onKeyup = ({ key }: KeyboardEvent) => {
+    if (key === 'Escape') {
+        emit('close')
+    }
+}
+
+watch(props, ({ isOpen }) => {
+    if (isOpen) {
+        document.body.classList.add('overflow-hidden')
+        document.addEventListener('keyup', onKeyup)
+    } else {
+        document.body.classList.remove('overflow-hidden')
+        document.removeEventListener('keyup', onKeyup)
+    }
+})
 </script>
 
 <style scoped>
@@ -42,9 +56,6 @@ onUnmounted(() => document.body.classList.remove('overflow-hidden'))
         rounded
         shadow;
 }
-</style>
-
-<style scoped>
 .fx-modal-enter-from,
 .fx-modal-leave-to {
     @apply opacity-0;

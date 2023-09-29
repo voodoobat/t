@@ -1,5 +1,11 @@
 <template>
-    <component :is="component" :to="to" :type="type" class="current">
+    <component
+        :is="component"
+        :to="to"
+        :type="type"
+        class="button"
+        :class="{ 'is-disabled': disabled }"
+    >
         <slot />
     </component>
 </template>
@@ -8,16 +14,11 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
-const props = withDefaults(
-    defineProps<{
-        type?: 'button' | 'submit' | ''
-        to?: string
-    }>(),
-    {
-        type: '',
-        to: '',
-    },
-)
+const props = defineProps<{
+    type?: 'button' | 'submit' | ''
+    to?: string
+    disabled?: boolean
+}>()
 
 const component = computed(() => {
     return props.to ? RouterLink : 'button'
@@ -25,7 +26,7 @@ const component = computed(() => {
 </script>
 
 <style scoped>
-.current {
+.button {
     @apply text-center
         py-4
         px-6

@@ -14,7 +14,7 @@
         </div>
     </template>
     <div v-else class="text-7xl text-center mt-5">🤷</div>
-    <LayoutModal v-if="modal" title="Добавление пользователя" @close="modal = false">
+    <LayoutModal :is-open="modal" title="Добавление пользователя" @close="modal = false">
         <UsersForm />
     </LayoutModal>
 </template>

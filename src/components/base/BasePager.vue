@@ -41,6 +41,14 @@ const change = (action: 'inc' | 'dec') => {
 
 <style scoped>
 .button {
-    @apply flex justify-center items-center w-12 h-12 rounded leading-none border border-gray-300;
+    @apply flex
+        justify-center
+        items-center
+        w-12
+        h-12
+        rounded
+        leading-none
+        border
+        border-gray-300;
 }
 </style>

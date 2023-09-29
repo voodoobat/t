@@ -9,7 +9,12 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
-    extends: ['plugin:@typescript-eslint/recommended', 'eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
+    extends: [
+        'plugin:@typescript-eslint/recommended',
+        'eslint:recommended',
+        'plugin:vue/vue3-recommended',
+        'prettier',
+    ],
     plugins: ['prettier', '@typescript-eslint'],
     rules: {
         'prettier/prettier': 'error',

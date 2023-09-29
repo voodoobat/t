@@ -6,7 +6,12 @@
             :total="store.searchResults.length"
             @change="(page) => (store.page = page)"
         />
-        <BaseSelect v-model:value="store.showBy" label="Rows per page" :options="options" @change="store.page = 1" />
+        <BaseSelect
+            v-model:value="store.showBy"
+            label="Rows per page"
+            :options="options"
+            @change="store.page = 1"
+        />
     </div>
 </template>
 

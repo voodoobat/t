@@ -5,7 +5,11 @@
         </label>
         <div class="relative">
             <select class="select" @change="change">
-                <option v-for="{ text, value } in options" :key="value" :value="value">
+                <option
+                    v-for="{ text, value } in options"
+                    :key="value"
+                    :value="value"
+                >
                     {{ text }}
                 </option>
             </select>

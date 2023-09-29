@@ -5,12 +5,18 @@
             <span class="flex flex-col relative top-0.5 text-gray-300">
                 <BaseIcon
                     class="w-2 h-2 rotate-180 transition-colors"
-                    :class="{ 'text-blue-600': isActive && store.sort?.direction === 'DESC' }"
+                    :class="{
+                        'text-blue-600':
+                            isActive && store.sort?.direction === 'DESC',
+                    }"
                     name="chevron"
                 />
                 <BaseIcon
                     class="w-2 h-2 transition-colors"
-                    :class="{ 'text-blue-600': isActive && store.sort?.direction === 'ASC' }"
+                    :class="{
+                        'text-blue-600':
+                            isActive && store.sort?.direction === 'ASC',
+                    }"
                     name="chevron"
                 />
             </span>

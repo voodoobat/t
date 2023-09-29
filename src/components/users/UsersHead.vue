@@ -1,7 +1,7 @@
 <template>
     <thead>
         <tr>
-            <UsersHeadCel text="id" prop="id" />
+            <UsersHeadCel text="id" prop="id" class="w-12" />
             <UsersHeadCel text="firstName" prop="firstName" />
             <UsersHeadCel text="lastName" prop="lastName" />
             <UsersHeadCel text="email" prop="email" />

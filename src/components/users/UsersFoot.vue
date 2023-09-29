@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between pt-2 pb-6">
+    <div class="flex flex-col-reverse md:flex-row justify-between gap-6 pt-2 pb-6">
         <BasePager
             :active="store.page"
             :size="store.showBy"

@@ -53,6 +53,7 @@ const change = (ev: Event) => {
         right-3
         w-2
         h-2
+        pointer-events-none
         text-gray-700;
 }
 </style>

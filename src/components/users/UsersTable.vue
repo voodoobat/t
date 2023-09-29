@@ -1,10 +1,14 @@
 <template>
     <BaseInput v-model:value="store.search" class="mb-2" />
     <template v-if="store.usersData.length">
-        <table class="table-fixed w-full text-sm">
-            <UsersHead />
-            <UsersBody />
-        </table>
+        <div class="overflow-x-hidden md:overflow-x-visible">
+            <div class="overflow-x-scroll md:overflow-x-visible">
+                <table class="table-fixed w-full text-sm min-w-[45rem] md:min-w-0">
+                    <UsersHead />
+                    <UsersBody />
+                </table>
+            </div>
+        </div>
     </template>
     <div v-else class="text-7xl text-center mt-5">🤷</div>
 </template>

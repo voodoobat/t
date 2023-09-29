@@ -39,5 +39,13 @@ const options: OptionInterface[] = [
         value: 50,
         text: '50',
     },
+    {
+        value: 150,
+        text: '150',
+    },
+    {
+        value: store.users.length,
+        text: 'ВСЕ',
+    },
 ]
 </script>

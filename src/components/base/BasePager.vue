@@ -3,7 +3,7 @@
         <button class="button" @click="change('dec')">
             <BaseIcon class="w-4 h-4 rotate-180 text-gray-700" name="arrow" />
         </button>
-        <span class="button current">
+        <span class="button is-current">
             {{ active }}
         </span>
         <span class="count"> / {{ pages }} </span>
@@ -44,11 +44,13 @@ const change = (action: 'inc' | 'dec') => {
     @apply flex
         justify-center
         items-center
-        w-12
-        h-12
+        p-3
         rounded
         leading-none
         border
         border-gray-300;
+}
+.button.is-current {
+    @apply px-4;
 }
 </style>

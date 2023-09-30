@@ -46,8 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { IBaseSelectOption } from '~/contracts/components/baseSelect.ts'
+import { computed, ref } from 'vue'
 import { IBaseTableSort } from '~/contracts/components/baseTable.ts'
 
 import LayoutDefault from '~/components/layout/LayoutDefault.vue'
@@ -65,12 +64,12 @@ import { TUserProps } from '~/contracts/scheme/user.ts'
 const store = useUsersStore()
 const isOpenModal = ref(false)
 
-const showByOptions: IBaseSelectOption[] = [
-    { value: store.showBy, text: store.showBy.toString() },
+const showByOptions = computed(() => [
+    { value: 5, text: '5' },
     { value: 25, text: '25' },
     { value: 50, text: '50' },
     { value: store.users.length, text: 'ВСЕ' },
-]
+])
 
 const sortUsers = (key: TUserProps) => {
     if (store.sort?.key === key) {

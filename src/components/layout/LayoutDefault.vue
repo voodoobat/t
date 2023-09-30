@@ -11,19 +11,16 @@
             <h1 v-if="title" class="mt-10 text-4xl font-accent font-semibold text-center">
                 {{ title }}
             </h1>
-            <LayoutLoader v-if="isLoading" class="mt-10" />
-            <transition name="fx-page">
-                <section v-if="!isLoading" class="mt-10">
-                    <slot />
-                </section>
-            </transition>
+            <div v-if="isLoading" class="text-3xl text-center animate-spin mt-24">⌛</div>
+            <section v-else class="mt-10">
+                <slot />
+            </section>
         </LayoutContainer>
     </main>
 </template>
 
 <script setup lang="ts">
 import LayoutContainer from '~/components/layout/LayoutContainer.vue'
-import LayoutLoader from '~/components/layout/LayoutLoader.vue'
 
 defineProps<{
     title?: string

@@ -1,19 +1,24 @@
 <template>
     <LayoutDefault title="Пользователи" :is-loading="store.isLoading">
         <div class="users-header">
-            <BaseInput v-model:value="store.search" class="w-full md:w-1/3" />
+            <BaseInput
+                v-model:value="store.search"
+                class="w-full md:w-1/3"
+                @input="store.page = 1"
+            />
             <BaseButton @click="isOpenModal = true">Добавить</BaseButton>
             <LayoutModal
                 :is-open="isOpenModal"
                 title="Добавление пользователя"
                 @close="isOpenModal = false"
             >
-                <UsersForm />
+                <UsersForm @submit="addUser" />
             </LayoutModal>
         </div>
         <div class="overflow-x-hidden md:overflow-x-visible">
             <div class="overflow-x-scroll md:overflow-x-visible">
                 <BaseTable
+                    v-if="store.usersData.length"
                     class="users-table"
                     :data="store.usersData as any[]"
                     :sort="store.sort as IBaseTableSort"
@@ -26,6 +31,7 @@
                     ]"
                     @sort="sortUsers"
                 />
+                <div v-else class="text-7xl text-center">🤷‍♀️</div>
             </div>
         </div>
         <div class="users-footer">
@@ -59,7 +65,8 @@ import BaseTable from '~/components/base/BaseTable.vue'
 import UsersForm from '~/components/users/UsersForm.vue'
 
 import { useUsersStore } from '~/store/useUsersStore.ts'
-import { TUserProps } from '~/contracts/scheme/user.ts'
+import { IUser } from '~/contracts/schema/user.ts'
+import { NonOptionalKeys } from '~/contracts/generics.ts'
 
 const store = useUsersStore()
 const isOpenModal = ref(false)
@@ -71,15 +78,23 @@ const showByOptions = computed(() => [
     { value: store.users.length, text: 'ВСЕ' },
 ])
 
-const sortUsers = (key: TUserProps) => {
+const sortUsers = (key: NonOptionalKeys<IUser>) => {
+    const { direction } = store.sort
+
     if (store.sort?.key === key) {
-        return (store.sort.direction = store.sort.direction === 'DESC' ? 'ASC' : 'DESC')
+        return (store.sort.direction = direction === 'DESC' ? 'ASC' : 'DESC')
     }
 
     store.sort = {
-        direction: store.sort?.direction || 'ASC',
+        direction: direction || 'ASC',
         key,
     }
+}
+
+const addUser = (user: IUser) => {
+    store.add(user)
+    isOpenModal.value = false
+    store.sort.key = ''
 }
 </script>
 

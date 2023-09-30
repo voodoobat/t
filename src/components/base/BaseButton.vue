@@ -1,4 +1,5 @@
 <template>
+    <!-- todo: перепиши эту хуйню -->
     <component
         :is="component"
         :to="to"
@@ -37,5 +38,8 @@ const component = computed(() => {
         transition-colors
         hover:bg-blue-800
         hover:text-white;
+}
+.button.is-disabled {
+    @apply opacity-50 pointer-events-none;
 }
 </style>

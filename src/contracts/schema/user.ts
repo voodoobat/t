@@ -1,5 +1,5 @@
 export interface IUser {
-    id: number
+    id: string
     email: string
     description?: string
     firstName: string
@@ -14,5 +14,3 @@ export interface IUserAddress {
     streetAddress: string
     zip: string
 }
-
-export type TUserProps = 'id' | 'firstName' | 'lastName' | 'email' | 'phone'

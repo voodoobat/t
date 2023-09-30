@@ -1,5 +1,5 @@
 <template>
-    <div class="inline-flex text-sm">
+    <div class="inline-flex flex-col gap-1 text-sm">
         <input
             v-maska
             :data-maska="maska"
@@ -8,13 +8,18 @@
             :placeholder="placeholder"
             :required="required"
             class="input"
+            :class="{ 'is-error': error }"
             @input="input"
             @focus="$emit('focus', $event.target)"
         />
+        <span v-if="error" class="text-xs text-red-400">
+            {{ error }}
+        </span>
     </div>
 </template>
 
 <script setup lang="ts">
+import { Ref } from 'vue'
 import { vMaska } from 'maska'
 
 type HTMLInputTypeAttribute =
@@ -37,11 +42,13 @@ withDefaults(
         required?: boolean
         value: string
         maska?: string
+        error?: string | Ref<string>
     }>(),
     {
         type: 'text',
         placeholder: '',
         maska: '',
+        error: '',
     },
 )
 
@@ -67,6 +74,10 @@ const input = (ev: Event) => {
         outline-none
         rounded-sm
         transition-colors;
+}
+
+.input.is-error {
+    @apply border-red-400 text-red-400;
 }
 
 .input::-webkit-outer-spin-button,

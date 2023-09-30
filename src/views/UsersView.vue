@@ -12,7 +12,7 @@
                 title="Добавление пользователя"
                 @close="isOpenModal = false"
             >
-                <UsersForm @submit="addUser" />
+                <UsersForm @on-submit="addUser" />
             </LayoutModal>
         </div>
         <div class="overflow-x-hidden md:overflow-x-visible">
@@ -93,6 +93,7 @@ const sortUsers = (key: NonOptionalKeys<IUser>) => {
 
 const addUser = (user: IUser) => {
     store.add(user)
+    console.log('add user')
     isOpenModal.value = false
     store.sort.key = ''
 }
@@ -110,7 +111,7 @@ const addUser = (user: IUser) => {
 }
 
 .users-table {
-    @apply table-fixed w-full text-sm;
+    @apply table-fixed w-full text-sm min-w-[740px];
 }
 
 .users-table :deep th:first-child {
